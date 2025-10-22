@@ -1,0 +1,8 @@
+fastapi>=0.104.1  #main framework for building api
+uvicorn>=0.24.0   #lightning fast ASGI server for serving FastAPI applications
+python-multipart>=0.0.6    # Is a library needed to handle file uploads in FastAPI applications
+google-generativeai>=0.3.0   # Is the official library provided by Google to interact with their Generative AI models and services.
+python-dotenv>=1.0.0       # Is a library that allows to load environment variables from a .env file into the application.
+pydantic>=2.5.0      # Is used for data validation and data modeling in FastAPI applications.
+aiofiles>=23.2.1     # Is an asynchronous file handling library used in FastAPI for efficient file operations.
+pillow>=10.1.0      # Is a powerful image processing library in Python used for opening, manipulating, and saving various image file formats.

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -56,17 +56,25 @@ export default function FloodDetectionSystem() {
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   // API calls
-  const callAPI = async (endpoint: string, data: any) => {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-      method: "POST",
-      headers: endpoint.includes("coordinates")
-        ? { "Content-Type": "application/json" }
-        : {},
-      body: endpoint.includes("coordinates") ? JSON.stringify(data) : data,
-    });
-    if (!response.ok) throw new Error(`API error: ${response.status}`);
-    return response.json();
+  const callAPI = async (
+  endpoint: string,
+  data: Record<string, unknown> | FormData
+) => {
+  const isCoordinateRequest = endpoint.includes("coordinates");
+
+  const options: RequestInit = {
+    method: "POST",
+    headers: isCoordinateRequest
+      ? { "Content-Type": "application/json" }
+      : undefined,
+    body: isCoordinateRequest ? JSON.stringify(data) : (data as FormData),
   };
+
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
+  if (!response.ok) throw new Error(`API error: ${response.status}`);
+  return response.json();
+};
+
 
   // Analysis handlers
   const handleCoordinateSubmit = async () => {
