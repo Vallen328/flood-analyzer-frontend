@@ -11,7 +11,7 @@ sys.path.append(str(Path(__file__).parent))
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 8001))
-    host = os.getenv("HOST", "127.0.0.1")
+    host = os.getenv("HOST", "0.0.0.0")
 
     print(f"Starting Flood Detection Backend API on {host}:{port}")
     print("API Documentation will be available at:")
@@ -23,6 +23,6 @@ if __name__ == "__main__":
         "main:app",
         host=host,
         port=port,
-        reload=True,
+        reload=False,  # 🚨 must be False for Render
         log_level="info"
     )
